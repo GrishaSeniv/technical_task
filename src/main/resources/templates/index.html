@@ -12,13 +12,15 @@
       }
 
       .image-container img {
-          transition: transform 0.3s ease; 
+          transition: transform 0.3s ease;
           width: 100px;
+          height: 100px;
+          object-fit: cover;
       }
 
-      .image-container:hover img {
-          transform: scale(4); 
-          z-index: 10; 
+      .image-container img:hover {
+          transform: scale(4);
+          z-index: 10;
           position: relative;
       }
     </style>
@@ -26,9 +28,9 @@
   <body>
     <div class="container">
       <h1 class="text-center my-4">Рибка на продаж</h1>
-    
+
       <a class="btn btn-success" href="/fish/create">Додати рибки</a>
-    
+
       <table class="table">
         <thead>
           <tr>
@@ -48,17 +50,19 @@
             <td th:text="${fish.catchDate.toString().substring(0,10)}"></td>
             <td>
               <div class="image-container">
-                <img th:src="@{'/images/'+${fish.imageFileName}}" alt="..." width="100">
+                <div th:each="imageFileName : ${fish.imageFileNames}">
+                  <img th:src="@{'/images/' + ${imageFileName}}" alt="..." width="100" style="margin: 5px;">
+                </div>
               </div>
             </td>
             <td>
-              <a class="btn btn-danger btn-sm" th:href="@{/fish/delete(id=${fish.id})}" onclick="return confirm('Ви впевнені?')">Прибрати</a> 
+              <a class="btn btn-danger btn-sm" th:href="@{/fish/delete(id=${fish.id})}" onclick="return confirm('Ви впевнені?')">Прибрати</a>
             </td>
           </tr>
-        </tbody>   
+        </tbody>
       </table>
     </div>
-   
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
   </body>
 </html>
