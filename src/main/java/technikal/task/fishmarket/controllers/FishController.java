@@ -3,6 +3,7 @@ package technikal.task.fishmarket.controllers;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -31,7 +32,6 @@ import java.util.stream.Collectors;
 @Controller
 @RequestMapping("/fish")
 public class FishController {
-
     @Autowired
     private FishRepository repo;
 
@@ -42,6 +42,7 @@ public class FishController {
         return "index";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/create")
     public String showCreatePage(Model model) {
         FishDto fishDto = new FishDto();
@@ -49,6 +50,7 @@ public class FishController {
         return "createFish";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/delete")
     public String deleteFish(@RequestParam int id) {
 
@@ -66,6 +68,7 @@ public class FishController {
         return "redirect:/fish";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/create")
     public String addFish(@Valid @ModelAttribute FishDto fishDto, BindingResult result) {
 
@@ -126,5 +129,4 @@ public class FishController {
             System.out.println("Exception: " + ex.getMessage());
         }
     }
-
 }
