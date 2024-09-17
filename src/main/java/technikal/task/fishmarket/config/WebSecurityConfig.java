@@ -1,8 +1,3 @@
-/*
- * Copyright (c) 2024 Javatar LLC
- * All rights reserved.
- */
-
 package technikal.task.fishmarket.config;
 
 import org.springframework.context.annotation.Bean;
@@ -21,7 +16,7 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
 /**
- * @author Hryhorii Seniv / Javatar LLC
+ * @author Hryhorii Seniv
  * @version 2024-09-16
  */
 @Configuration
